@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'inscription aux Clubs Parascolaires à Solicode</title>
+</head>
+
+<body>
+
+    <section id="form">
+        <form oninput="check()" onSubmit="return false">
+            <h1>Inscription</h1>
+            <label for="lastname">Nom</label>
+            <input type="text" id="lastname">
+            <span id="error1"></span>
+            <label for="firstname">Prénom</label>
+            <input type="text" id="firstname">
+            <span id="error2"></span>
+            <label for="email" >Email</label>
+            <input type="text" id="email">
+            <span id="error3"></span>
+            <label for="number">Télephone</label>
+            <input type="text" id="number">
+            <span id="error4"></span>
+            <h3>Genre</h3>
+            <div class="genre">
+            <input type="radio" name="genre" value="d" id="genred" checked>            
+            <label>Féminin</label>
+            <input type="radio" name="genre" value="f" id="genre">
+            <label>Masculin</label>
+            <input type="radio" name="genre" value="m" id="genre">
+            <br>
+            <span id="error5"></span>
+            </div>
+            <div class="group">
+            <h3>Groupe</h3>
+            <input type="radio" name="group" id="groupd" checked>
+            <label>DW101</label>
+            <input type="radio" name="group" id="group">
+            <label>DW102</label>
+            <input type="radio" name="group" id="group">
+            <label>DW103</label>
+            <input type="radio" name="group" id="group">
+            <label>DM101</label>
+            <input type="radio" name="group" id="group">
+            <label>DM102</label>
+            <input type="radio" name="group" id="group">
+            <br>
+            <span id="error6"></span>
+            </div>
+            <div class="club">
+            <h3>Club</h3>
+            <select  id="select" multiple>
+                <option value="2">Informatique</option>
+                <option value="2">Robotique</option>
+                <option value="2">Jeu d'échecs</option>
+                <option value="2">Musique</option>
+                <option value="2">Théatre</option>
+                <option value="2">Foot</option>
+            </select>
+            <br>
+            <span id="error7"></span>
+            </div>
+            <button id="btn" onclick="envoyer()" disabled="true">Envoyer</button>
+        </form>
+    </section>
+    
+
+<section id="done">
+
+    <h1>Félicitations vous êtes inscrit avec succès</h1>
+</section>
+
+
+
+
+
+
+<style>
+    body{
+        background-color: white;
+    }
+    
+    section{
+        text-align: center;
+    }
+    form{
+        padding: 54px 373px 48px 132px;
+width: 280PX;
+text-align: left;
+background-color: rgb(0, 0, 0);
+color:white;
+margin-left: 20%;
+margin-top: 3%;
+font-family: 'Lato', sans-serif;
+border-radius: 27px;
+display: grid;        }
+    form label{
+
+    font-size: 13px;
+    color: white;
+    font-weight: bold;
+    padding-top: 7px;
+    padding-bottom: 2px;
+    align-items:left;
+    text-align: left;
+}
+
+form input{
+    padding: 15px 200px 9px;
+border-radius: 5px;
+background-color: white;
+border: 1px solid black;
+}
+
+
+
+form .club select{
+
+border-radius: 3px;
+color: rgb(0, 0, 0);
+padding-right: 470PX;
+background-color: white;
+border: none;
+
+}
+form button{
+    padding: 9px 5px 9px;
+    border-radius: 8px;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    margin-top: 18px;
+    border: none;
+    cursor: not-allowed;
+}
+form span{
+    font-size: 13px;
+    color: red;
+}
+form #genred{
+    display: none;
+}
+form #groupd{
+    display: none;
+}
+#done{
+    display: none;
+    color: black;
+    font-family: sans-serif;
+    padding-top: 200px;
+    font-size: large;
+}
+
+
+
+</style>
+
+
+
+
+
+
+    <script>
+
+        function check(){
+        let lastname = document.getElementById('lastname').value.toLowerCase();
+        let firstname = document.getElementById('firstname').value.toLowerCase();
+        let email = document.getElementById('email').value.trim().toLowerCase();
+        let tel = document.getElementById('number').value;
+        let genre = document.getElementById('genred');
+        let group = document.getElementById('groupd');
+        let select = document.getElementById('select').value;
+        let prefix = tel.slice(0, 2);
+        output1 = document.getElementById("error1");
+        output2 = document.getElementById("error2");
+        output3 = document.getElementById("error3");
+        output4 = document.getElementById("error4");    
+        output5 = document.getElementById("error5");
+        output6 = document.getElementById("error6");
+        output7 = document.getElementById("error7");
+        var regularExpression  = /^[0-9]{6,16}$/
+
+
+        if(lastname.length > 30 || lastname.length == 0){
+            output1.innerHTML = "*Votre nom de famille doit contenir plus de 0 lettre et max 30 lettres"
+
+            output2.innerHTML = " ";
+
+            
+        }
+
+        
+        
+        else if(firstname.length > 30 || firstname.length == 0){
+            output2.innerHTML = "*Votre prénom doit contenir plus de 0 lettre et max 30 lettres";
+            output1.innerHTML = " ";
+
+        }        
+        
+        else if(email !== firstname.trim() + "." + lastname.trim()  + "@ofppt.ma" || email == "prenom.nom@ofppt.ma"){
+            output3.innerHTML = "*Votre Email doit être écrit :prenom.nom@ofppt.ma"
+            output2.innerHTML = " ";
+            output1.innerHTML = " ";
+
+
+        }
+        
+        
+        
+        else if(prefix != "05" && prefix != "06" && prefix != "07"){
+            output4.innerHTML = '*Votre numéro de téléphone doit commencer par "05" or "06" or "07'
+            output1.innerHTML = " ";
+            output2.innerHTML = " ";
+            output3.innerHTML = " ";
+
+        }
+        
+        
+        else if(tel.length != 10 || !regularExpression.test(tel)){
+            output4.innerHTML = "*Votre numéro de téléphone doit contenir 10 chiffres et sans lettre ni caractère"
+            output1.innerHTML = " ";
+            output2.innerHTML = " ";
+            output3.innerHTML = " ";
+
+        }
+        else if(genre.checked){
+            output5.innerHTML = '*Vous devez choisir un genre';
+            output4.innerHTML = " ";
+            output1.innerHTML = " ";
+            output2.innerHTML = " ";
+            output3.innerHTML = " ";
+
+        } 
+        
+        else if(group.checked){
+            output6.innerHTML = '*Vous devez choisir un groupe';
+            output5.innerHTML = ' ';
+            output4.innerHTML = " "
+            output1.innerHTML = " ";
+            output2.innerHTML = " ";
+            output3.innerHTML = " ";            
+        } 
+        
+
+        else if(select != 2){
+            output7.innerHTML = "*Vous devez sélectionner un club"  
+            output6.innerHTML = " ";
+            output5.innerHTML = " ";
+            output4.innerHTML = " ";
+            output1.innerHTML = " ";
+            output2.innerHTML = " ";
+            output3.innerHTML = " ";           
+        }
+
+
+        else{
+            output7.innerHTML = " "; 
+            output6.innerHTML = " ";
+            output5.innerHTML = " ";
+            output4.innerHTML = " ";
+            output1.innerHTML = " ";
+            output2.innerHTML = " ";
+            output3.innerHTML = " ";
+            document.getElementById("btn").disabled = false;
+        }
+
+
+        }
+
+        function envoyer()
+        {
+            document.getElementById("done").style.display = "block";
+            document.getElementById("form").style.display = "none";
+
+        }
+    </script>
+
+
+
+
+
+    
+</body>
+</html>
